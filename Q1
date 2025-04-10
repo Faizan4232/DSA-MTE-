@@ -1,0 +1,33 @@
+1. Explain the concept of a prefix sum array and its applications
+ANS:-
+Prefix Sum Array: Concept and Applications
+1. Concept
+A prefix sum array (also called a cumulative sum array) is a data structure that stores the cumulative sum of elements of an original array up to each index. It allows efficient range sum queries in constant time after an O(n)O(n) preprocessing step.
+•	Given Array: A=[a0,a1,a2,…,an−1]A=[a0,a1,a2,…,an−1]
+•	Prefix Sum Array PP:
+P[i]={a0if i=0,P[i−1]+aiotherwise.P[i]={a0P[i−1]+aiif i=0,otherwise.
+Example:
+A=[3,1,4,2]  ⟹  P=[3,4,8,10]A=[3,1,4,2]⟹P=[3,4,8,10]
+2. Key Properties
+•	Range Sum in O(1)O(1):
+The sum of elements from A[l]A[l] to A[r]A[r] is computed as:
+Sum(l,r)=P[r]−P[l−1](assuming P[−1]=0)Sum(l,r)=P[r]−P[l−1](assuming P[−1]=0)
+Example: Sum from index 1 to 2 in AA:
+P[2]−P[0]=8−3=5(=1+4)P[2]−P[0]=8−3=5(=1+4)
+•	Space-Time Tradeoff:
+o	Preprocessing time: O(n)O(n).
+o	Query time: O(1)O(1).
+o	Space: O(n)O(n) (additional array).
+3. Applications
+1.	Range Sum Queries
+o	Quickly compute sums over any subarray (e.g., in financial data analysis).
+o	Used in algorithms like Fenwick Trees (Binary Indexed Trees) and Segment Trees.
+2.	Equilibrium Index
+o	Find an index where the sum of left elements equals the sum of right elements.
+3.	Subarray Sum Problems
+o	Check if a subarray sums to a target (e.g., in Kadane’s Algorithm for maximum subarray sum).
+4.	Image Processing
+o	Compute sums of rectangular regions in 2D prefix sums (integral images).
+5.	Algorithmic Optimizations
+o	Used in sliding window problems, DP optimizations, and frequency counting.
+
