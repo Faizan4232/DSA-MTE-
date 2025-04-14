@@ -1,0 +1,4 @@
+Method	         Time Complexity	Space Complexity
+buildPrefixSum      	O(n)	           O(n)
+rangeSum	            O(1)	           O(1)
+Overall             	O(n)	           O(n)
