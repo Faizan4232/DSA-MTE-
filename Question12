@@ -1,0 +1,69 @@
+12. Rearrange numbers into the lexicographically next greater permutation. Write its algorithm, program. Find its time and space complexities. Explain with suitable example.?
+
+Ans.import java.util.Arrays;
+
+public class NextPermutation {
+
+    public static void nextPermutation(int[] arr) {
+        int n = arr.length;
+        int i = n - 2;
+
+        // Step 1: Find first decreasing element
+        while (i >= 0 && arr[i] >= arr[i + 1]) {
+            i--;
+        }
+
+        if (i >= 0) {
+            // Step 2: Find element just larger than arr[i]
+            int j = n - 1;
+            while (arr[j] <= arr[i]) {
+                j--;
+            }
+            // Step 3: Swap
+            swap(arr, i, j);
+        }
+
+        // Step 4: Reverse from i+1 to end
+        reverse(arr, i + 1, n - 1);
+    }
+
+    // Helper method to swap
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    // Helper method to reverse array
+    private static void reverse(int[] arr, int start, int end) {
+        while (start < end) {
+            swap(arr, start++, end--);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3};
+        nextPermutation(arr);
+        System.out.println("Next permutation: " + Arrays.toString(arr));
+    }
+}
+
+-Algorithm (Next Permutation Algorithm)
+Find the first decreasing element from the end:
+
+Traverse from right to left, find the first index i such that arr[i] < arr[i + 1]
+
+If not found, the array is in descending order → reverse it
+
+Find the next greater element to the right of i:
+
+Traverse from the end and find index j such that arr[j] > arr[i]
+
+Swap arr[i] and arr[j]
+
+Reverse the part of the array from i + 1 to end
+
+- Time and Space Complexity
+Type	Complexity
+Time	O(n)
+Space	O(1)
