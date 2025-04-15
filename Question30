@@ -1,0 +1,21 @@
+30. Explain the concept of linked lists and their applications in algorithm design.
+Ans. 🔗 What is a Linked List?
+      A linked list is a linear data structure made up of nodes, where each node contains:
+      - Data – the value or element.
+      - Pointer (reference) – that points to the next node in the sequence.
+      Unlike arrays, elements in a linked list are not stored in contiguous memory.
+
+      🧩 Types of Linked Lists:
+      Type	Description
+      Singly Linked List	Each node points to the next node.
+      Doubly Linked List	Each node points to both the next and previous node.
+      Circular Linked List	The last node points back to the first node, forming a circle.
+
+      ⚙️ Applications in Algorithm Design:
+        Application	Use Case:-
+        Stacks and Queues	      Implemented easily using linked lists (especially dynamic ones).
+        Graph Algorithms	      Adjacency lists use linked lists to represent edges of a graph.
+        Hash Tables (Chaining)	Collision resolution using linked lists (separate chaining).
+        Memory Management	      Used in free lists (linked blocks of memory).
+        LRU Cache	              Doubly linked list helps maintain order of recently used items.
+        Polynomial Arithmetic	  Terms of polynomials stored and operated as linked lists.
