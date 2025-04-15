@@ -1,0 +1,74 @@
+26. Remove the n-th node from the end of a singly linked list. Write its algorithm, program. Find its time and space complexities. Explain with suitable example.
+Ans. class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int val) { this.val = val; }
+}
+
+public class RemoveNthNodeFromEnd {
+
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        // Create a dummy node to simplify the case of removing the head node
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+        
+        // Move fast pointer n+1 steps ahead to maintain a gap of n between fast and slow
+        for (int i = 1; i <= n + 1; i++) {
+            fast = fast.next;
+        }
+        
+        // Move both fast and slow pointers one step at a time
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        
+        // Now, slow is at the node just before the node to be deleted
+        slow.next = slow.next.next; // Remove the nth node from the end
+        
+        return dummy.next; // Return the modified list
+    }
+
+    public static void printList(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + " -> ");
+            head = head.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        // Create a linked list: 1 -> 2 -> 3 -> 4 -> 5 -> null
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        System.out.print("Original List: ");
+        printList(head);
+
+        int n = 2; // Remove 2nd node from the end (node with value 4)
+        head = removeNthFromEnd(head, n);
+
+        System.out.print("List After Removal: ");
+        printList(head);  // Expected: 1 -> 2 -> 3 -> 5 -> null
+    }
+}
+
+-Initialize two pointers fast and slow, both pointing to the head.
+
+Move the fast pointer n steps ahead.
+
+Move both fast and slow pointers one step at a time until fast reaches the end.
+
+Remove the node that slow is pointing to by adjusting the next pointer.
+
+If the node to be removed is the head, update the head pointer.
+
+-Time and Space Complexity
+Type	Complexity
+Time	O(L)
+Space	O(1)
