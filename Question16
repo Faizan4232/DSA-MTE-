@@ -1,0 +1,45 @@
+16. Find the majority element in an array that appears more than n/2 times. Write itsalgorithm, program. Find its time and space complexities. Explain with suitable example.
+
+Ans. public class MajorityElement {
+
+    public static int majorityElement(int[] nums) {
+        int count = 0;
+        int candidate = 0;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        return candidate;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 2, 1, 1, 1, 2, 2};
+        int result = majorityElement(nums);
+        System.out.println("Majority Element: " + result);
+    }
+}
+
+- Algorithm: Boyer-Moore Voting Algorithm
+candidate = None
+
+count = 0
+
+Traverse the array:
+
+If count == 0, set candidate = current element
+
+If current element == candidate → increment count
+
+Else → decrement count
+
+At the end, candidate is the majority element.
+
+- Time and Space Complexity
+Type	Complexity
+Time	O(n)
+Space	O(1)
