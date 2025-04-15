@@ -1,0 +1,73 @@
+25. Solve the problem of finding the next greater element for each element in an array. Write its algorithm, program. Find its time and space complexities. Explain with suitable example
+Ans. -Example:
+      Input: arr = [4, 5, 2, 10, 8]   
+      Output: nextGreater = [5, 10, 10, -1, -1]
+      
+      The next greater element for 4 is 5.
+      
+      The next greater element for 5 is 10.
+      
+      The next greater element for 2 is 10.
+      
+      The next greater element for 10 is -1 (no greater element to the right).
+      
+      The next greater element for 8 is -1 (no greater element to the right).
+
+      -import java.util.Stack;
+
+public class NextGreaterElement {
+
+    public static int[] nextGreaterElements(int[] arr) {
+        int n = arr.length;
+        int[] result = new int[n];
+        Stack<Integer> stack = new Stack<>();
+
+        // Traverse the array from right to left
+        for (int i = n - 1; i >= 0; i--) {
+            // Pop elements that are smaller than or equal to the current element
+            while (!stack.isEmpty() && stack.peek() <= arr[i]) {
+                stack.pop();
+            }
+            
+            // If stack is not empty, top of the stack is the next greater element
+            if (!stack.isEmpty()) {
+                result[i] = stack.peek();
+            } else {
+                result[i] = -1;
+            }
+
+            // Push the current element onto the stack
+            stack.push(arr[i]);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {4, 5, 2, 10, 8};
+        int[] nextGreater = nextGreaterElements(arr);
+
+        System.out.print("Next Greater Elements: ");
+        for (int num : nextGreater) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+-Algorithm
+Initialize an empty stack and an output array of the same length as the input array.
+
+Traverse the input array from right to left.
+
+For each element, pop elements from the stack while they are smaller than or equal to the current element.
+
+If the stack is not empty, the top of the stack is the next greater element for the current element; otherwise, it is -1.
+
+Push the current element onto the stack.
+
+Return the output array.
+
+-Time and Space Complexity
+Type	Complexity
+Time	O(n)
+Space	O(n)
