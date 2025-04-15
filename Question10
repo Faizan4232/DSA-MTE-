@@ -1,0 +1,45 @@
+10. Generate all permutations of a given string. Write its algorithm, program. Find its time and space complexities. Explain with suitable example ?
+Ans. public class Permutations {
+    public static void permute(String str, int l, int r) {
+        if (l == r) {
+            System.out.println(str);
+            return;
+        }
+
+        for (int i = l; i <= r; i++) {
+            str = swap(str, l, i);
+            permute(str, l + 1, r);
+            str = swap(str, l, i); // backtrack
+        }
+    }
+
+    private static String swap(String s, int i, int j) {
+        char[] charArray = s.toCharArray();
+        char temp = charArray[i];
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
+        return String.valueOf(charArray);
+    }
+
+    public static void main(String[] args) {
+        String str = "ABC";
+        System.out.println("Permutations of " + str + ":");
+        permute(str, 0, str.length() - 1);
+    }
+}
+
+   -Algorithm (Backtracking Approach):
+    Use recursion to fix characters one by one.
+    
+    For every index i in the string:
+    
+    Swap character at current index with character at i.
+    
+    Recurse for the remaining substring.
+    
+    Backtrack by swapping the characters back to their original positions.
+
+  -Time and Space Complexity:
+  Operation	Complexity
+  Time	O(n × n!) → n! permutations, each takes O(n) time to print
+  Space (stack)	O(n) → recursion depth is n
