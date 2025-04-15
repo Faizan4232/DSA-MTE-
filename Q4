@@ -1,0 +1,51 @@
+4. Check if an array can be split into two parts such that the sum of the prefix equals the sum of the suffix. Write its algorithm, program. Find its time and space complexities.Explain with suitable example.
+Ans. public class EqualPrefixSuffixSum {
+    public static boolean canBeSplit(int[] arr) {
+        int totalSum = 0;
+        for (int num : arr) {
+            totalSum += num;
+        }
+
+        int prefixSum = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            prefixSum += arr[i];
+            int suffixSum = totalSum - prefixSum;
+            if (prefixSum == suffixSum) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 3};
+        if (canBeSplit(arr)) {
+            System.out.println("Yes, the array can be split.");
+        } else {
+            System.out.println("No, the array cannot be split.");
+        }
+    }
+}
+ Algorithm (Efficient – O(n) Time):
+Compute the total sum of the array.
+
+Initialize prefixSum = 0.
+
+Traverse the array from 0 to n - 2:
+
+Add arr[i] to prefixSum
+
+Check if prefixSum == totalSum - prefixSum
+
+If true, return true (split point exists)
+
+If no such point is found, return false
+
+Note: We stop at n-2 because we need non-empty prefix and suffix.
+
+Time & Space Complexity:
+Operation	Time Complexity	Space Complexity
+Total Sum Calc	O(n)	O(1)
+     Traversal	O(n)	O(1)
+         Total	O(n)	O(1)
