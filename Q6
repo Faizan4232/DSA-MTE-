@@ -1,0 +1,52 @@
+6. Find the length of the longest substring without repeating characters. Write its algorithm, program. Find its time and space complexities. Explain with suitable example ?
+Ans. import java.util.HashSet;
+
+public class LongestUniqueSubstring {
+    public static int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int maxLen = 0;
+        int start = 0;
+        HashSet<Character> set = new HashSet<>();
+
+        for (int end = 0; end < n; end++) {
+            while (set.contains(s.charAt(end))) {
+                set.remove(s.charAt(start));
+                start++;
+            }
+            set.add(s.charAt(end));
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+
+        return maxLen;
+    }
+
+    public static void main(String[] args) {
+        String s = "abcabcbb";
+        int result = lengthOfLongestSubstring(s);
+        System.out.println("Length of longest substring without repeating characters: " + result);
+    }
+}
+
+-Algorithm (Sliding Window + HashSet – O(n) Time):
+Use two pointers: start and end to represent the current window.
+
+Use a HashSet to store characters in the current window.
+
+Move end forward:
+
+If character at end is not in the set:
+
+Add it to the set.
+
+Update maxLen = max(maxLen, end - start + 1)
+
+Else:
+
+Remove characters from the start until there's no duplicate.
+
+Continue until end reaches the end of the string.
+
+- Time and Space Complexity:
+Operation	Complexity
+Time	O(n)
+Space (HashSet)	O(k) where k is charset size (at most O(n))
