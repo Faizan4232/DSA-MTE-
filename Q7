@@ -1,0 +1,25 @@
+7. Explain the sliding window technique and its use in string problems.
+Ans. The sliding window is a method used to reduce the time complexity of problems involving contiguous sequences (subarrays or substrings).
+     Instead of checking every possible substring (which is often O(n²)), the sliding window "slides" over the string/array and keeps track of only the necessary information, usually in O(n) time.
+
+    - Basic Idea:
+    Maintain a window using two pointers: start and end.
+    
+    Slide the end pointer to expand the window.
+    
+    If the condition is violated (like duplicate character, or sum > k):
+    
+    Slide the start pointer to shrink the window and fix it.
+    
+    Keep track of the result while traversing.
+
+    - Use in String:
+    Because many string problems involve finding substrings that satisfy certain properties, such as:
+
+    Unique characters
+    
+    Specific length or pattern
+    
+    Character frequencies
+    
+    The sliding window helps optimize these checks efficiently.
