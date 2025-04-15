@@ -1,0 +1,78 @@
+23. How to find the maximum XOR of two numbers in an array. Write its algorithm, program. Find its time and space complexities. Explain with suitable example.
+Ans.  Example
+Input: nums = [3, 10, 5, 25, 2, 8]
+Output: 28
+Explanation:
+
+The maximum XOR is obtained by XOR-ing 5 and 25.
+5 ^ 25 = 28 (binary 0101 ^ 11001 = 11100).
+
+class TrieNode {
+    TrieNode[] children = new TrieNode[2];
+}
+
+public class MaximumXOR {
+
+    // Insert a number into the Trie
+    public static void insert(TrieNode root, int num) {
+        TrieNode node = root;
+        for (int i = 31; i >= 0; i--) {
+            int bit = (num >> i) & 1;
+            if (node.children[bit] == null) {
+                node.children[bit] = new TrieNode();
+            }
+            node = node.children[bit];
+        }
+    }
+
+    // Find the maximum XOR of num with the Trie
+    public static int findMaxXOR(TrieNode root, int num) {
+        TrieNode node = root;
+        int maxXor = 0;
+        for (int i = 31; i >= 0; i--) {
+            int bit = (num >> i) & 1;
+            int oppositeBit = 1 - bit;
+            if (node.children[oppositeBit] != null) {
+                maxXor |= (1 << i);  // Set the bit in the result
+                node = node.children[oppositeBit];
+            } else {
+                node = node.children[bit];
+            }
+        }
+        return maxXor;
+    }
+
+    // Main function to find the maximum XOR
+    public static int findMaximumXOR(int[] nums) {
+        TrieNode root = new TrieNode();
+        int maxXor = 0;
+        for (int num : nums) {
+            insert(root, num);
+        }
+        for (int num : nums) {
+            maxXor = Math.max(maxXor, findMaxXOR(root, num));
+        }
+        return maxXor;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {3, 10, 5, 25, 2, 8};
+        System.out.println("Maximum XOR: " + findMaximumXOR(nums));  // Output: 28
+    }
+}
+
+-Algorithm
+Create a Trie:
+
+Each number is inserted in the Trie bit by bit.
+
+Iterate through the numbers:
+
+For each number, try to maximize the XOR by traversing the Trie to select the opposite bit (maximize XOR).
+
+Return the maximum XOR found during the process.
+
+-Time and Space Complexity
+Type	Complexity
+Time	O(n * L)
+Space	O(n * L)
