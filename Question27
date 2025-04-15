@@ -1,0 +1,98 @@
+27. Find the node where two singly linked lists intersect. Write its algorithm, program. Find its time and space complexities. Explain with suitable example.
+Ans. class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int val) { this.val = val; }
+}
+
+public class LinkedListIntersection {
+
+    // Helper function to get the length of a linked list
+    public static int getLength(ListNode head) {
+        int length = 0;
+        while (head != null) {
+            length++;
+            head = head.next;
+        }
+        return length;
+    }
+
+    public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int lenA = getLength(headA);
+        int lenB = getLength(headB);
+        
+        // Align the pointers to the same starting point
+        ListNode pointerA = headA;
+        ListNode pointerB = headB;
+        
+        // Move the pointer of the longer list ahead by the difference in lengths
+        if (lenA > lenB) {
+            for (int i = 0; i < lenA - lenB; i++) {
+                pointerA = pointerA.next;
+            }
+        } else {
+            for (int i = 0; i < lenB - lenA; i++) {
+                pointerB = pointerB.next;
+            }
+        }
+        
+        // Move both pointers one step at a time and check for intersection
+        while (pointerA != null && pointerB != null) {
+            if (pointerA == pointerB) {
+                return pointerA; // Intersection found
+            }
+            pointerA = pointerA.next;
+            pointerB = pointerB.next;
+        }
+        
+        return null; // No intersection
+    }
+
+    // Helper function to print the list
+    public static void printList(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + " -> ");
+            head = head.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        // List 1: 1 -> 2 -> 3 -> 4 -> 5
+        ListNode headA = new ListNode(1);
+        headA.next = new ListNode(2);
+        headA.next.next = new ListNode(3);
+        headA.next.next.next = new ListNode(4);
+        headA.next.next.next.next = new ListNode(5);
+
+        // List 2: 9 -> 8 -> 3 -> 4 -> 5
+        ListNode headB = new ListNode(9);
+        headB.next = new ListNode(8);
+        headB.next.next = headA.next.next; // Intersection at node with value 3
+
+        // Find intersection node
+        ListNode intersection = getIntersectionNode(headA, headB);
+
+        if (intersection != null) {
+            System.out.println("The intersection node value is: " + intersection.val);
+        } else {
+            System.out.println("There is no intersection.");
+        }
+    }
+}
+
+-Algorithm
+Calculate the lengths of both lists (len1 and len2).
+
+Compute the difference diff = |len1 - len2|.
+
+Move the pointer of the longer list ahead by diff steps.
+
+Move both pointers one step at a time, comparing the nodes.
+
+Return the node where the two pointers meet, or null if no intersection.
+
+-Time and Space Complexity
+Type	Complexity
+Time	O(L)
+Space	O(1)
