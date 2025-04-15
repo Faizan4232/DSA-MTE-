@@ -1,0 +1,49 @@
+29. Write a program to check if an integer is a palindrome without converting it to a string.Write its algorithm, program. Find its time and space complexities. Explain with suitable example
+Ana. public class PalindromeNumber {
+    public static boolean isPalindrome(int x) {
+        // Negative numbers and numbers ending with 0 (but not 0 itself) are not palindromes
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+
+        int reversedHalf = 0;
+        while (x > reversedHalf) {
+            int digit = x % 10;
+            reversedHalf = reversedHalf * 10 + digit;
+            x /= 10;
+        }
+
+        // If even digits: x == reversedHalf
+        // If odd digits: x == reversedHalf / 10 (middle digit can be ignored)
+        return x == reversedHalf || x == reversedHalf / 10;
+    }
+
+    public static void main(String[] args) {
+        int num1 = 121;
+        int num2 = 123;
+
+        System.out.println(num1 + " is palindrome? " + isPalindrome(num1)); // true
+        System.out.println(num2 + " is palindrome? " + isPalindrome(num2)); // false
+    }
+}
+
+-Algorithm:
+Negative Numbers are not palindromes (because of the - sign).
+
+Trailing Zeros (like 10, 100) are not palindromes unless the number is 0.
+
+Reverse half of the number and compare with the other half:
+
+While x > reversedHalf, keep extracting the last digit and forming reversedHalf.
+
+Stop when x <= reversedHalf.
+
+If the number has even digits, x == reversedHalf.
+
+For odd digits, x == reversedHalf / 10 (middle digit can be ignored).
+
+-⏱ Time Complexity:
+O(log₁₀(n)): We're dividing the number by 10 each time.
+
+💾 Space Complexity:
+O(1): Only a few integer variables used.
