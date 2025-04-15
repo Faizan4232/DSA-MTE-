@@ -1,0 +1,119 @@
+28. Implement two stacks in a single array. Write its algorithm, program. Find its time and space complexities. Explain with suitable example.
+Ans. public class TwoStacksInSingleArray {
+    int[] arr;
+    int top1, top2;
+    int size;
+
+    public TwoStacksInSingleArray(int size) {
+        this.size = size;
+        arr = new int[size];
+        top1 = -1;       // Stack 1 starts from the left
+        top2 = size;     // Stack 2 starts from the right
+    }
+
+    // Push operation for Stack 1
+    public void pushStack1(int value) {
+        if (top1 + 1 == top2) {
+            System.out.println("Stack Overflow! Cannot push into Stack 1.");
+            return;
+        }
+        top1++;
+        arr[top1] = value;
+    }
+
+    // Push operation for Stack 2
+    public void pushStack2(int value) {
+        if (top1 + 1 == top2) {
+            System.out.println("Stack Overflow! Cannot push into Stack 2.");
+            return;
+        }
+        top2--;
+        arr[top2] = value;
+    }
+
+    // Pop operation for Stack 1
+    public int popStack1() {
+        if (top1 == -1) {
+            System.out.println("Stack Underflow! Stack 1 is empty.");
+            return -1;
+        }
+        int value = arr[top1];
+        top1--;
+        return value;
+    }
+
+    // Pop operation for Stack 2
+    public int popStack2() {
+        if (top2 == size) {
+            System.out.println("Stack Underflow! Stack 2 is empty.");
+            return -1;
+        }
+        int value = arr[top2];
+        top2++;
+        return value;
+    }
+
+    // Utility function to print the stacks
+    public void printStacks() {
+        System.out.print("Stack 1: ");
+        for (int i = 0; i <= top1; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+
+        System.out.print("Stack 2: ");
+        for (int i = size - 1; i >= top2; i--) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Create an array that can hold 10 elements for both stacks
+        TwoStacksInSingleArray stacks = new TwoStacksInSingleArray(10);
+
+        // Pushing values into both stacks
+        stacks.pushStack1(5);
+        stacks.pushStack1(10);
+        stacks.pushStack2(20);
+        stacks.pushStack2(30);
+
+        stacks.printStacks();
+
+        // Popping values from both stacks
+        System.out.println("Popped from Stack 1: " + stacks.popStack1());
+        System.out.println("Popped from Stack 2: " + stacks.popStack2());
+
+        stacks.printStacks();
+    }
+}
+
+-Algorithm
+Push Operation (Stack 1):
+
+If top1 + 1 == top2, report stack overflow (array full).
+
+Otherwise, increment top1 and insert the element at arr[top1].
+
+Push Operation (Stack 2):
+
+If top1 + 1 == top2, report stack overflow.
+
+Otherwise, decrement top2 and insert the element at arr[top2].
+
+Pop Operation (Stack 1):
+
+If top1 == -1, report stack underflow (stack is empty).
+
+Otherwise, return the element at arr[top1] and decrement top1.
+
+Pop Operation (Stack 2):
+
+If top2 == n, report stack underflow.
+
+Otherwise, return the element at arr[top2] and increment top2.
+
+-Time and Space Complexity
+Type	Complexity
+Time	O(1) for each push and pop operation (constant time)
+Space	O(n) (where n is the size of the array, which stores the elements of both stacks)
