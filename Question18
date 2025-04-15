@@ -1,0 +1,72 @@
+18. Find the maximum XOR of two numbers in an array. Write its algorithm, program. Find its time and space complexities. Explain with suitable example.
+Ans. class TrieNode {
+    TrieNode[] children = new TrieNode[2]; // 0 and 1
+}
+
+public class MaximumXOR {
+
+    private static TrieNode root = new TrieNode();
+
+    // Insert number into Trie
+    public static void insert(int num) {
+        TrieNode node = root;
+        for (int i = 31; i >= 0; i--) {
+            int bit = (num >> i) & 1;
+            if (node.children[bit] == null)
+                node.children[bit] = new TrieNode();
+            node = node.children[bit];
+        }
+    }
+
+    // Find max XOR for this num using the Trie
+    public static int getMaxXOR(int num) {
+        TrieNode node = root;
+        int maxXor = 0;
+        for (int i = 31; i >= 0; i--) {
+            int bit = (num >> i) & 1;
+            int oppositeBit = 1 - bit;
+            if (node.children[oppositeBit] != null) {
+                maxXor |= (1 << i);
+                node = node.children[oppositeBit];
+            } else {
+                node = node.children[bit];
+            }
+        }
+        return maxXor;
+    }
+
+    public static int findMaximumXOR(int[] nums) {
+        for (int num : nums)
+            insert(num);
+
+        int max = 0;
+        for (int num : nums)
+            max = Math.max(max, getMaxXOR(num));
+
+        return max;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {3, 10, 5, 25, 2, 8};
+        int result = findMaximumXOR(nums);
+        System.out.println("Maximum XOR: " + result);
+    }
+}
+
+-Algorithm
+Insert all numbers into a binary Trie
+
+Each node has 0 and 1 children
+
+Store the bits of numbers from most-significant (31st bit) to least-significant (0th bit)
+
+For each number, try to get the maximum XOR using the trie:
+
+At each bit, choose the opposite bit if possible
+
+Accumulate the XOR value accordingly
+
+-Time and Space Complexity
+Type	Complexity
+Time	O(n * 32) = O(n)
+Space	O(n * 32) = O(n)
