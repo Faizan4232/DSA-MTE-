@@ -1,0 +1,56 @@
+21. How to count the number of 1s in the binary representation of numbers from 0 to n.Write its algorithm, program. Find its time and space complexities. Explain with suitable example.
+Ans.Example
+Input: n = 5
+Output: 7
+Explanation:
+
+Binary representation of numbers:
+
+0 = 0
+
+1 = 1
+
+2 = 10
+
+3 = 11
+
+4 = 100
+
+5 = 101
+
+So, the total number of 1s is 7.
+
+
+public class CountOnes {
+
+    public static int countBits(int n) {
+        int[] dp = new int[n + 1];
+        int count = 0;
+
+        for (int i = 1; i <= n; i++) {
+            dp[i] = dp[i >> 1] + (i & 1); // Shift right and add the least significant bit
+            count += dp[i];  // Accumulate the count of 1s
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        System.out.println("Total number of 1s from 0 to " + n + ": " + countBits(n));
+    }
+}
+
+- Algorithm
+Initialize a dp array where dp[i] stores the number of 1s in the binary representation of i.
+
+Loop through all numbers from 1 to n:
+
+For each number i, calculate dp[i] = dp[i >> 1] + (i & 1). The right shift i >> 1 gives the number of 1s in i // 2, and (i & 1) checks if the least significant bit is 1.
+
+Return the sum of dp[i] for i = 0 to n.
+
+-Time and Space Complexity
+Type	Complexity
+Time	O(n)
+Space	O(n)
