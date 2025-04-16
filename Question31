@@ -52,7 +52,7 @@ Add index i to deque.
 
 If i >= k - 1, the front of deque is the maximum for that window.
 
-📊 Time and Space Complexity
+Time and Space Complexity
 Time Complexity: O(n)
 Each element is pushed and popped at most once from the deque.
 
