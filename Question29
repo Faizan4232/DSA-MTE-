@@ -42,8 +42,8 @@ If the number has even digits, x == reversedHalf.
 
 For odd digits, x == reversedHalf / 10 (middle digit can be ignored).
 
--⏱ Time Complexity:
+- Time Complexity:
 O(log₁₀(n)): We're dividing the number by 10 each time.
 
-💾 Space Complexity:
+ Space Complexity:
 O(1): Only a few integer variables used.
