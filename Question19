@@ -38,7 +38,7 @@ maxEndingHere: max product ending at current index
 
 minEndingHere: min product ending here (important for negative numbers)
 
-🔧 Steps:
+Steps:
 Initialize:
 
 maxSoFar = nums[0]
