@@ -39,7 +39,7 @@ public class SlidingWindowMax {
     }
 }
 
-🔧 Algorithm (Using Deque)
+ Algorithm (Using Deque)
 Create a deque dq that stores indices of useful elements.
 
 For each index i in array:
